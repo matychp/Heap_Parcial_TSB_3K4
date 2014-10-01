@@ -321,6 +321,7 @@ public class Heap <T extends Comparable>
               add(x);
               return true;
           }
+          add(x);
           return false;
       }
 }
