@@ -17,36 +17,29 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {        
-        Heap <Integer> ah = new Heap<>(6, false);
+    public static void main(String[] args) {
+        Heap<Integer> ah = new Heap<>(6, true);
         ah.add(5);
-        ah.add(3);
-        ah.add(7);
-        ah.add(9);
-        ah.add(4);
-        ah.add(2);
-//        System.out.println("Lucky?: " + ah.lucky(1));
-//        System.out.println("Lucky?: " + ah.lucky(10));
+        ah.add(12);
+        ah.add(20);
+        ah.add(8);
+        ah.add(10);
+        ah.add(11);
+        System.out.println("Lucky?: " + ah.lucky(1));
+        System.out.println("Lucky?: " + ah.lucky(10));
         SimpleList dosOptimosGet = ah.getBoth();
-        if(dosOptimosGet != null){
-            System.out.println(dosOptimosGet.toString());
-        }else{
-            System.out.println("No existen dos optimos (hay 0 o 1 elemento).");
-        }
-        
+        System.out.println(dosOptimosGet.toString());
+
         SimpleList dosOptimosRemove = ah.removeBoth();
-        if(dosOptimosRemove != null){
-            System.out.println(dosOptimosRemove.toString());
-        }else{
-            System.out.println("No existen dos optimos (hay 0 o 1 elemento).");
+        System.out.println(dosOptimosRemove.toString());
+        System.out.println(ah.toString());
+
+        System.out.print(
+                "Mostramos en orden de extraccion: \n[ ");
+        while (!ah.isEmpty()) {
+            int x = ah.remove();
+            System.out.print(x + " ");
         }
-//        System.out.print("Mostramos en orden de extraccion: \n[ ");
-//        while( ! ah.isEmpty() )
-//        {
-//            int x = ah.remove();
-//            System.out.print(x + " ");
-//        }
-//        System.out.println("]\n");
+        System.out.println("]\n");
     }
-    
 }

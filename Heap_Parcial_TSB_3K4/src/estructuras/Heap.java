@@ -225,8 +225,7 @@ public class Heap<T extends Comparable> {
      *
      * @return la conversion a String del Heap.
      */
-    @Override
-    public String toString() {
+    public String toStringTodoJunto() {
         if (isEmpty()) {
             return "[]";
         }
@@ -240,6 +239,24 @@ public class Heap<T extends Comparable> {
         }
         r.append(" ]");
         return r.toString();
+    }
+
+    @Override
+    public String toString() {
+        if (isEmpty()) {
+            return "[]";
+        }
+
+        StringBuilder r = new StringBuilder("[ ");
+        for (int nivel = 1, nivelesMaximos = (int) Math.ceil((Math.log10(count + 1) / Math.log10(2))); nivel <= nivelesMaximos; nivel++) {
+            r.append("[ ");
+            for (int primerNodo = (int) (Math.pow(2, nivel - 1) - 1), ultimoNodo = (int) (Math.pow(2, nivel - 1) + primerNodo - 1); primerNodo <= ultimoNodo && primerNodo < count; primerNodo++) {
+                r.append(heap[primerNodo].toString()).append(" ");
+            }
+            r.append(" ]");
+        }
+        r.append(" ]");
+        return r.toString();        
     }
 
     /**
@@ -363,6 +380,10 @@ public class Heap<T extends Comparable> {
 
     public SimpleList getBoth() {
         SimpleList<T> both = new SimpleList<>();
+        if (count == 2) {
+            both.addLast(heap[0].getData());
+            both.addLast(heap[1].getData());
+        }
         if (count >= 3) {
             both.addLast(heap[0].getData());
             if (optimal_left(1, 2)) {
@@ -370,18 +391,17 @@ public class Heap<T extends Comparable> {
             } else {
                 both.addLast(heap[2].getData());
             }
-            return both;
         }
-        return null;
+        return both;
     }
 
     public SimpleList removeBoth() {
         SimpleList<T> both = new SimpleList<>();
-        if (count >= 3) {
+        if (count >= 2) {
             both.addLast(remove());
             both.addLast(remove());
-            return both;
         }
-        return null;
+        count -= 2;
+        return both;
     }
 }
