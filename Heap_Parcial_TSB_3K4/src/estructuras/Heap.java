@@ -1,4 +1,4 @@
-package heap_parcial_tsb_3k4;
+package estructuras;
 
 /**
  * Implementa el concepto de Heap o Monticulo Binario, mediante generics. El

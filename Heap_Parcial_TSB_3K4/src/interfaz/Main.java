@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package heap_parcial_tsb_3k4;
+package interfaz;
+
+import estructuras.Heap;
+import estructuras.SimpleList;
 
 /**
  *

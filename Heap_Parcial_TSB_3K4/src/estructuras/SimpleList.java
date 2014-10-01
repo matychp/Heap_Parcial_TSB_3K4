@@ -1,4 +1,4 @@
-package heap_parcial_tsb_3k4;
+package estructuras;
 
 /**
  *  Una lista generica. Empleamos generics para control de homogeneidad. Tambien
