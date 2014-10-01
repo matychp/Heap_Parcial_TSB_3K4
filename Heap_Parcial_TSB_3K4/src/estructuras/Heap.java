@@ -401,7 +401,6 @@ public class Heap<T extends Comparable> {
             both.addLast(remove());
             both.addLast(remove());
         }
-        count -= 2;
         return both;
     }
 }
