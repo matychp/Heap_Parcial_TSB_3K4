@@ -241,6 +241,12 @@ public class Heap<T extends Comparable> {
         return r.toString();
     }
 
+    /**
+     * Muestra el contenido del arreglo del Heap, que contiene el arbol binario completo o casi completo.
+     * Donde por cada nivel, se enciera entre [ ], y separados por ", ", el contenido de cada Slot.
+     * El primer for, calcula el nivel
+     * @return 
+     */
     @Override
     public String toString() {
         if (isEmpty()) {
@@ -248,7 +254,7 @@ public class Heap<T extends Comparable> {
         }
 
         StringBuilder r = new StringBuilder("[ ");
-        for (int nivel = 1, nivelesMaximos = (int) Math.ceil((Math.log10(count + 1) / Math.log10(2))); nivel <= nivelesMaximos; nivel++) {
+        for (int nivel = 1, altura = (int) Math.ceil((Math.log10(count + 1) / Math.log10(2))); nivel <= altura; nivel++) {
             r.append("[ ");
             for (int primerNodo = (int) (Math.pow(2, nivel - 1) - 1), ultimoNodo = (int) (Math.pow(2, nivel - 1) + primerNodo - 1); primerNodo <= ultimoNodo && primerNodo < count; primerNodo++) {
                 r.append(heap[primerNodo].toString()).append(" ");
