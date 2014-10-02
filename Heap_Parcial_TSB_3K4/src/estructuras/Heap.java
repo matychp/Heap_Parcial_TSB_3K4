@@ -366,21 +366,8 @@ public class Heap<T extends Comparable> {
     }
 
     public boolean lucky(T data) {
-        if (ascendent) {
-            if (data.compareTo(heap[0].getData()) < 0) {
-                add(data);
-                return true;
-            }
-            add(data);
-            return false;
-        } else {
-            if (data.compareTo(heap[0].getData()) > 0) {
-                add(data);
-                return true;
-            }
-            add(data);
-            return false;
-        }
+        add(data);
+        return (heap[0].getData().equals(data));
     }
 
     public SimpleList getBoth() {
