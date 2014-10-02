@@ -225,7 +225,7 @@ public class Heap<T extends Comparable> {
      *
      * @return la conversion a String del Heap.
      */
-    public String toStringTodoJunto() {
+    public String toStringSinNiveles() {
         if (isEmpty()) {
             return "[]";
         }
@@ -245,7 +245,7 @@ public class Heap<T extends Comparable> {
      * Muestra el contenido del arreglo del Heap, que contiene el arbol binario completo o casi completo.
      * Donde por cada nivel, se enciera entre [ ], y separados por ", ", el contenido de cada Slot.
      * El primer for, calcula el nivel
-     * @return 
+     * @return la conversion a String del Heap teniendo en cuenta sus niveles.
      */
     @Override
     public String toString() {
@@ -341,6 +341,61 @@ public class Heap<T extends Comparable> {
         return false;
     }
 
+    /**
+     * Agrega un número tomado por parametro al Heap. El metodo add() se encarga de la insercion en el lugar correcto.
+     * Si ese lugar resulta ser la raiz, significa que tuviste suerte, y el orden de la insersion fue constante.
+     * @param data
+     * @return true: insersion del nodo en la raiz del heap, false: en algun otro lugar (orden logn).
+     */
+    public boolean lucky(T data) {
+        add(data);
+        return (heap[0].getData().equals(data));
+    }
+
+    /**
+     * Devuelve una lista que contiene los dos objetos mas optimos del heap.
+     * Por optimo se entiende, que si el heap es ascendente, será los dos menores;
+     * Si el heap es descendente, serán los dos mayores.
+     * Siempre será el padre, y uno de los hijos.
+     * Si hay 0 o 1 elemento en el heap, se retorna una lista vacia.
+     * Si hay dos, es trivial, se devuelven esos dos.
+     * Si hay mas de dos, se devuelve la raiz del heap, y se elige usando el metodo optimal_leff(),
+     * el hijo más optimo del heap (teniendo en cuenta ascendencia o descendencia).
+     * @return una SimpleList con los dos valores más optimos del heap.
+     */
+    public SimpleList getBoth() {
+        SimpleList<T> both = new SimpleList<>();
+        if (count == 2) {
+            both.addLast(heap[0].getData());
+            both.addLast(heap[1].getData());
+        }
+        if (count >= 3) {
+            both.addLast(heap[0].getData());
+            if (optimal_left(1, 2)) {
+                both.addLast(heap[1].getData());
+            } else {
+                both.addLast(heap[2].getData());
+            }
+        }
+        return both;
+    }
+
+    /**
+     * Retorna una lista de los dos nodos más optimos del heap.
+     * Además, esos nodos se eliminan del heap.
+     * Por eso lo unico que hace falta es usar el metodo remove() dos veces.
+     * Y se obtienen ambos nodos.
+     * @return una SimpleList con los dos valores más optimos del heap.
+     */
+    public SimpleList removeBoth() {
+        SimpleList<T> both = new SimpleList<>();
+        if (count >= 2) {
+            both.addLast(remove());
+            both.addLast(remove());
+        }
+        return both;
+    }
+    
     private class Slot<T extends Comparable> {
 
         private T data;
@@ -363,36 +418,5 @@ public class Heap<T extends Comparable> {
         public String toString() {
             return data.toString();
         }
-    }
-
-    public boolean lucky(T data) {
-        add(data);
-        return (heap[0].getData().equals(data));
-    }
-
-    public SimpleList getBoth() {
-        SimpleList<T> both = new SimpleList<>();
-        if (count == 2) {
-            both.addLast(heap[0].getData());
-            both.addLast(heap[1].getData());
-        }
-        if (count >= 3) {
-            both.addLast(heap[0].getData());
-            if (optimal_left(1, 2)) {
-                both.addLast(heap[1].getData());
-            } else {
-                both.addLast(heap[2].getData());
-            }
-        }
-        return both;
-    }
-
-    public SimpleList removeBoth() {
-        SimpleList<T> both = new SimpleList<>();
-        if (count >= 2) {
-            both.addLast(remove());
-            both.addLast(remove());
-        }
-        return both;
     }
 }

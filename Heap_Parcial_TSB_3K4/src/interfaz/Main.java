@@ -164,7 +164,7 @@ public class Main {
     }
 
     private static void toStringSinNiveles() {
-        System.out.println(h.toStringTodoJunto());
+        System.out.println(h.toStringSinNiveles());
     }
 
     private static void extraerElementos() {
