@@ -1,5 +1,6 @@
 package interfaz;
 
+import io.Consola;
 import estructuras.Heap;
 import estructuras.SimpleList;
 

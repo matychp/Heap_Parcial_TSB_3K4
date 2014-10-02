@@ -1,4 +1,4 @@
-package interfaz;
+package io;
 
 /**
  * Clase para facilitar operaciones de carga por teclado en consola estandar
