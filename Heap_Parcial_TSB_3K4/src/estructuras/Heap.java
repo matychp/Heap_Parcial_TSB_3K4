@@ -365,21 +365,20 @@ public class Heap<T extends Comparable> {
         }
     }
 
-    public boolean lucky(T x) {
-        Slot<T> aux = new Slot<>(x);
+    public boolean lucky(T data) {
         if (ascendent) {
-            if (aux.getData().compareTo(heap[0].getData()) < 0) {
-                add(x);
+            if (data.compareTo(heap[0].getData()) < 0) {
+                add(data);
                 return true;
             }
-            add(x);
+            add(data);
             return false;
         } else {
-            if (aux.getData().compareTo(heap[0].getData()) > 0) {
-                add(x);
+            if (data.compareTo(heap[0].getData()) > 0) {
+                add(data);
                 return true;
             }
-            add(x);
+            add(data);
             return false;
         }
     }
